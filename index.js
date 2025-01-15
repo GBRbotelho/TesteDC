@@ -88,3 +88,6 @@ app.listen(PORT, () => {
 });
 
 app.post("/authenticate", Controller.authenticate);
+app.get("/", (req, res) => {
+  res.send("Bem vindo");
+});
