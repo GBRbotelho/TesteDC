@@ -1,7 +1,10 @@
 const fs = require("fs");
+const path = require("path"); // Importando o módulo path para resolver o caminho de forma confiável
 const https = require("https");
+
+// Usando caminho absoluto para garantir que o arquivo seja encontrado
 https.globalAgent.options.ca = fs.readFileSync(
-  "./ca_bundle/ca_intermediate_root_bundle.pem"
+  path.join(__dirname, "ca_bundle/ca_intermediate_root_bundle.pem")
 );
 
 require("dotenv").config();
@@ -75,15 +78,14 @@ async function login(user) {
 }
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
-//Cors
+// Cors
 const cors = require("cors");
 app.use(cors());
 
-//BodyParser
+// BodyParser
 const bodyParser = require("body-parser");
-// ...
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
