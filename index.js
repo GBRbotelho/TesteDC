@@ -1,8 +1,13 @@
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+const https = require("https");
 
 require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
+
+const agent = new https.Agent({
+  rejectUnauthorized: false, // Ignorar erros de SSL (não recomendado para produção)
+});
 
 const Controller = {
   async authenticate(req, res) {
@@ -40,6 +45,8 @@ async function login(user) {
   try {
     const response = await axios.post(url, payload, {
       headers,
+      httpsAgent: agent,
+      httpAgent: agent,
     });
 
     if (
