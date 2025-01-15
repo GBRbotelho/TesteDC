@@ -3,9 +3,11 @@ const path = require("path"); // Importando o módulo path para resolver o camin
 const https = require("https");
 
 // Usando caminho absoluto para garantir que o arquivo seja encontrado
-https.globalAgent.options.ca = fs.readFileSync(
-  path.join(__dirname, "ca_bundle/ca_intermediate_root_bundle.pem")
-);
+https.globalAgent.options.ca =
+  fs.readFileSync(path.join(__dirname, "ca_bundle/certificado.pem")) +
+  fs.readFileSync(
+    path.join(__dirname, "ca_bundle/ca_intermediate_root_bundle.pem")
+  );
 
 require("dotenv").config();
 const express = require("express");
